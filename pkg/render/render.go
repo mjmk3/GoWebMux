@@ -11,6 +11,9 @@ import (
 
 var functions = template.FuncMap{}
 
+func NewTemplates() {
+}
+
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
 
 	tc, err := CreateTemplateCache()
