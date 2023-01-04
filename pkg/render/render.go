@@ -2,6 +2,7 @@ package render
 
 import (
 	"GoWebMux/pkg/config"
+	"GoWebMux/pkg/handler"
 	"bytes"
 	"fmt"
 	"html/template"
@@ -18,7 +19,7 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
-func RenderTemplate(w http.ResponseWriter, tmpl string) {
+func RenderTemplate(w http.ResponseWriter, tmpl string, td *handler.TemplateData) {
 
 	var tc map[string]*template.Template
 
