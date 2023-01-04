@@ -2,16 +2,13 @@ package main
 
 import (
 	"GoWebMux/pkg/config"
-	"GoWebMux/pkg/handler"
-	"github.com/bmizerany/pat"
+	"github.com/go-chi/chi/v5"
 	"net/http"
 )
 
 func route(app *config.AppConfig) http.Handler {
-	mux := pat.New()
 
-	mux.Get("/", http.HandlerFunc(handler.Repo.Home))
-	mux.Get("/about", http.HandlerFunc(handler.Repo.About))
+	mux := chi.NewRouter()
 
 	return mux
 }
