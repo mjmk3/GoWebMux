@@ -2,7 +2,7 @@ package render
 
 import (
 	"GoWebMux/pkg/config"
-	"GoWebMux/pkg/handler"
+	"GoWebMux/pkg/model"
 	"bytes"
 	"fmt"
 	"html/template"
@@ -19,7 +19,11 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
-func RenderTemplate(w http.ResponseWriter, tmpl string, td *handler.TemplateData) {
+func AddDefaultData(td *model.TemplateData) *model.TemplateData {
+	return td
+}
+
+func RenderTemplate(w http.ResponseWriter, tmpl string, td *model.TemplateData) {
 
 	var tc map[string]*template.Template
 
@@ -35,7 +39,9 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, td *handler.TemplateData
 
 	buf := new(bytes.Buffer)
 
-	_ = t.Execute(buf, nil)
+	td = AddDefaultData(td)
+
+	_ = t.Execute(buf, td)
 
 	_, err := buf.WriteTo(w)
 	if err != nil {
